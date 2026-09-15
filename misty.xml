@@ -1,180 +1,276 @@
 <song>
-	<metadata timesignature="4/4" key="Eb" accidentals="flat" />
+	<metadata timesignature="4/4" key="Eb" accidentals="flat" name="Misty" author="Erroll Garner" />
 	<bar>
 		<chords>
 			<chord romannumerals="true">Imaj7</chord>
 		</chords>
+		<lyrics>
+			<lyric>These</lyric>
+		</lyrics>
 	</bar>
 	<bar>
 		<chords>
 			<chord romannumerals="true">v7</chord>
 			<chord romannumerals="true">I7</chord>
 		</chords>
+		<lyrics>
+			<lyric>are</lyric>
+		</lyrics>
 	</bar>
 	<bar>
 		<chords>
 			<chord romannumerals="true">IVmaj7</chord>
 		</chords>
+		<lyrics>
+			<lyric>placeholder</lyric>
+		</lyrics>
 	</bar>
 	<bar>
 		<chords>
 			<chord romannumerals="true">iv7</chord>
 			<chord romannumerals="true">bVII7</chord>
 		</chords>
+		<lyrics>
+			<lyric>lyrics,</lyric>
+		</lyrics>
 	</bar>
 	<bar>
 		<chords>
 			<chord romannumerals="true">Imaj7</chord>
 			<chord romannumerals="true">vi7</chord>
 		</chords>
+		<lyrics>
+			<lyric>not</lyric>
+		</lyrics>
 	</bar>
 	<bar>
 		<chords>
 			<chord romannumerals="true">ii7</chord>
 			<chord romannumerals="true">V7</chord>
 		</chords>
+		<lyrics>
+			<lyric>Misty's</lyric>
+		</lyrics>
 	</bar>
 	<bar>
 		<chords>
 			<chord romannumerals="true">iii7</chord>
 			<chord romannumerals="true">VI7</chord>
 		</chords>
+		<lyrics>
+			<lyric>real</lyric>
+		</lyrics>
 	</bar>
 	<bar>
 		<chords>
 			<chord romannumerals="true">ii7</chord>
 			<chord romannumerals="true">V7</chord>
 		</chords>
+		<lyrics>
+			<lyric>words,</lyric>
+		</lyrics>
 	</bar>
 	<bar>
 		<chords>
 			<chord romannumerals="true">Imaj7</chord>
 		</chords>
+		<lyrics>
+			<lyric>since</lyric>
+		</lyrics>
 	</bar>
 	<bar>
 		<chords>
 			<chord romannumerals="true">v7</chord>
 			<chord romannumerals="true">I7</chord>
 		</chords>
+		<lyrics>
+			<lyric>those</lyric>
+		</lyrics>
 	</bar>
 	<bar>
 		<chords>
 			<chord romannumerals="true">IVmaj7</chord>
 		</chords>
+		<lyrics>
+			<lyric>are</lyric>
+		</lyrics>
 	</bar>
 	<bar>
 		<chords>
 			<chord romannumerals="true">iv7</chord>
 			<chord romannumerals="true">bVII7</chord>
 		</chords>
+		<lyrics>
+			<lyric>still</lyric>
+		</lyrics>
 	</bar>
 	<bar>
 		<chords>
 			<chord romannumerals="true">Imaj7</chord>
 			<chord romannumerals="true">vi7</chord>
 		</chords>
+		<lyrics>
+			<lyric>copyrighted.</lyric>
+		</lyrics>
 	</bar>
 	<bar>
 		<chords>
 			<chord romannumerals="true">ii7</chord>
 			<chord romannumerals="true">V7</chord>
 		</chords>
+		<lyrics>
+			<lyric>Click</lyric>
+		</lyrics>
 	</bar>
 	<bar>
 		<chords>
 			<chord romannumerals="true">I6</chord>
 		</chords>
+		<lyrics>
+			<lyric>any</lyric>
+		</lyrics>
 	</bar>
 	<bar>
 		<chords>
 			<chord romannumerals="true">I6</chord>
 		</chords>
+		<lyrics>
+			<lyric>bar</lyric>
+		</lyrics>
 	</bar>
 	<bar>
 		<chords>
 			<chord romannumerals="true">v7</chord>
 		</chords>
+		<lyrics>
+			<lyric>above</lyric>
+		</lyrics>
 	</bar>
 	<bar>
 		<chords>
 			<chord romannumerals="true">I7</chord>
 		</chords>
+		<lyrics>
+			<lyric>to</lyric>
+		</lyrics>
 	</bar>
 	<bar>
 		<chords>
 			<chord romannumerals="true">IVmaj7</chord>
 		</chords>
+		<lyrics>
+			<lyric>edit</lyric>
+		</lyrics>
 	</bar>
 	<bar>
 		<chords>
 			<chord romannumerals="true">IVmaj7</chord>
 		</chords>
+		<lyrics>
+			<lyric>its</lyric>
+		</lyrics>
 	</bar>
 	<bar>
 		<chords>
 			<chord romannumerals="true">bv7</chord>
 		</chords>
+		<lyrics>
+			<lyric>raw</lyric>
+		</lyrics>
 	</bar>
 	<bar>
 		<chords>
 			<chord romannumerals="true">VII7</chord>
 			<chord romannumerals="true">II7</chord>
 		</chords>
+		<lyrics>
+			<lyric>XML</lyric>
+		</lyrics>
 	</bar>
 	<bar>
 		<chords>
 			<chord romannumerals="true">iiiø</chord>
 			<chord romannumerals="true">VI7b9</chord>
 		</chords>
+		<lyrics>
+			<lyric>and</lyric>
+		</lyrics>
 	</bar>
 	<bar>
 		<chords>
 			<chord romannumerals="true">ii7</chord>
 			<chord romannumerals="true">V7</chord>
 		</chords>
+		<lyrics>
+			<lyric>type in</lyric>
+		</lyrics>
 	</bar>
 	<bar>
 		<chords>
 			<chord romannumerals="true">Imaj7</chord>
 		</chords>
+		<lyrics>
+			<lyric>your own</lyric>
+		</lyrics>
 	</bar>
 	<bar>
 		<chords>
 			<chord romannumerals="true">v7</chord>
 			<chord romannumerals="true">I7</chord>
 		</chords>
+		<lyrics>
+			<lyric>lyrics instead</lyric>
+		</lyrics>
 	</bar>
 	<bar>
 		<chords>
 			<chord romannumerals="true">IVmaj7</chord>
 		</chords>
+		<lyrics>
+			<lyric>it just</lyric>
+		</lyrics>
 	</bar>
 	<bar>
 		<chords>
 			<chord romannumerals="true">iv7</chord>
 			<chord romannumerals="true">bVII7</chord>
 		</chords>
+		<lyrics>
+			<lyric>takes a</lyric>
+		</lyrics>
 	</bar>
 	<bar>
 		<chords>
 			<chord romannumerals="true">Imaj7</chord>
 			<chord romannumerals="true">vi7</chord>
 		</chords>
+		<lyrics>
+			<lyric>second and</lyric>
+		</lyrics>
 	</bar>
 	<bar>
 		<chords>
 			<chord romannumerals="true">ii7</chord>
 			<chord romannumerals="true">V7</chord>
 		</chords>
+		<lyrics>
+			<lyric>works exactly</lyric>
+		</lyrics>
 	</bar>
 	<bar>
 		<chords>
 			<chord romannumerals="true">I6</chord>
 		</chords>
+		<lyrics>
+			<lyric>like editing</lyric>
+		</lyrics>
 	</bar>
 	<bar>
 		<chords>
 			<chord romannumerals="true">I6</chord>
 		</chords>
+		<lyrics>
+			<lyric>the chords.</lyric>
+		</lyrics>
 	</bar>
 </song>

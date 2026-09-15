@@ -57,7 +57,19 @@ describe('parseSong', () => {
 		const song = parseSong(
 			'<song><metadata timesignature="3/4" key="Am" accidentals="sharp" /></song>'
 		);
-		expect(song.metadata).toEqual({ timesignature: '3/4', key: 'Am', accidentals: 'sharp' });
+		expect(song.metadata).toEqual({
+			name: '',
+			author: '',
+			timesignature: '3/4',
+			key: 'Am',
+			accidentals: 'sharp'
+		});
+	});
+
+	it('reads the name and author metadata attributes', () => {
+		const song = parseSong('<song><metadata name="Misty" author="Erroll Garner" /></song>');
+		expect(song.metadata.name).toBe('Misty');
+		expect(song.metadata.author).toBe('Erroll Garner');
 	});
 
 	it('parses the romannumerals flag on a chord', () => {

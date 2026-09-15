@@ -7,7 +7,7 @@ function serializeMetadata(song: Song): string | null {
 	const attrs = metadataFieldRegistry
 		.map((field) => {
 			const value = song.metadata[field.id];
-			return value !== undefined ? `${field.id}="${escapeXmlAttribute(value)}"` : null;
+			return value ? `${field.id}="${escapeXmlAttribute(value)}"` : null;
 		})
 		.filter((attr): attr is string => attr !== null);
 

@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { songStore } from '../../state/songStore.svelte';
 	import MetadataPanel from '../Metadata/MetadataPanel.svelte';
+	import SongHeader from './SongHeader.svelte';
 	import BarView from './BarView.svelte';
 
 	let song = $derived(songStore.song);
 </script>
 
+<SongHeader metadata={song.metadata} />
 <MetadataPanel metadata={song.metadata} />
 
 <div class="bars">

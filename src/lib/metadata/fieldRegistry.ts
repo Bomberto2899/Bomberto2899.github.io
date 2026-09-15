@@ -20,11 +20,15 @@ export interface MetadataFieldDescriptor<T = string> {
 
 // Registered in required file order: adding a field elsewhere in the app only requires
 // creating its descriptor file and pushing it here.
+import { nameField } from './fields/nameField';
+import { authorField } from './fields/authorField';
 import { timeSignatureField } from './fields/timeSignatureField';
 import { keyField } from './fields/keyField';
 import { accidentalsField } from './fields/accidentalsField';
 
 export const metadataFieldRegistry: MetadataFieldDescriptor<any>[] = [
+	nameField,
+	authorField,
 	timeSignatureField,
 	keyField,
 	accidentalsField
@@ -58,4 +62,12 @@ export function getKey(metadata: Metadata): string {
 
 export function getAccidentalPreference(metadata: Metadata): 'flat' | 'sharp' {
 	return getTypedValue<'flat' | 'sharp'>(metadata, 'accidentals');
+}
+
+export function getSongName(metadata: Metadata): string {
+	return getTypedValue<string>(metadata, 'name');
+}
+
+export function getSongAuthor(metadata: Metadata): string {
+	return getTypedValue<string>(metadata, 'author');
 }
