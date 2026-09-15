@@ -2,23 +2,31 @@
 	import type { ChordEvent, Metadata } from '../../model/types';
 	import { getAccidentalPreference, getKey } from '../../metadata/fieldRegistry';
 	import { romanToChordSymbol } from '../../theory/romanNumerals';
+	import { chordSymbolToRoman } from '../../theory/literalChords';
 	import { notationMode } from '../../state/notationMode.svelte';
 
 	let { chord, metadata }: { chord: ChordEvent; metadata: Metadata } = $props();
 
 	let displayText = $derived.by(() => {
-		if (!chord.romanNumerals || notationMode.current === 'roman') {
+		const key = getKey(metadata);
+		const accidentalPref = getAccidentalPreference(metadata);
+		const wantsRoman = notationMode.current === 'roman';
+
+		if (chord.romanNumerals === wantsRoman) {
+			// Already authored in the requested notation.
 			return chord.text;
 		}
 		try {
-			return romanToChordSymbol(chord.text, getKey(metadata), getAccidentalPreference(metadata));
+			return wantsRoman
+				? chordSymbolToRoman(chord.text, key, accidentalPref)
+				: romanToChordSymbol(chord.text, key, accidentalPref);
 		} catch {
 			return chord.text;
 		}
 	});
 </script>
 
-<span class="chord" class:roman={chord.romanNumerals && notationMode.current === 'roman'}>
+<span class="chord" class:roman={notationMode.current === 'roman'}>
 	{displayText}
 </span>
 
