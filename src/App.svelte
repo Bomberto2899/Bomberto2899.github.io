@@ -2,7 +2,7 @@
 	import exampleXml from '../leadsheet-example.xml?raw';
 	import { songStore } from './lib/state/songStore.svelte';
 	import { parseSong } from './lib/xml/parseSong';
-	import { autosave, restoreAutosaved } from './lib/persistence/localStorageAutosave';
+	import { autosave, autosaveNow, restoreAutosaved } from './lib/persistence/localStorageAutosave';
 	import Toolbar from './lib/components/Toolbar.svelte';
 	import SongView from './lib/components/Song/SongView.svelte';
 
@@ -12,7 +12,14 @@
 	$effect(() => {
 		autosave(songStore.song);
 	});
+
+	// The debounced autosave above can otherwise lose an edit made just before a reload/close.
+	function flushAutosave() {
+		autosaveNow(songStore.song);
+	}
 </script>
+
+<svelte:window onbeforeunload={flushAutosave} />
 
 <main>
 	<header>

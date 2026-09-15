@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { songStore } from '../state/songStore.svelte';
+	import { createBlankSong } from '../model/blankSong';
 	import { downloadSong } from '../persistence/download';
 	import { parseUploadedFile } from '../persistence/upload';
 	import ErrorBanner from './Common/ErrorBanner.svelte';
@@ -9,6 +10,13 @@
 
 	function triggerUpload() {
 		fileInput?.click();
+	}
+
+	function clearSong() {
+		if (confirm('Clear the current leadsheet? This removes all bars and resets metadata to defaults.')) {
+			songStore.load(createBlankSong());
+			uploadError = null;
+		}
 	}
 
 	async function onFileSelected(event: Event) {
@@ -32,6 +40,7 @@
 		<button onclick={() => songStore.addBar()}>+ Add bar</button>
 		<button onclick={triggerUpload}>Upload leadsheet…</button>
 		<button onclick={() => downloadSong(songStore.song)}>Download leadsheet</button>
+		<button class="danger" onclick={clearSong}>Clear</button>
 		<input
 			bind:this={fileInput}
 			type="file"
@@ -67,6 +76,12 @@
 
 	button:hover {
 		background: #eef2f7;
+	}
+
+	button.danger:hover {
+		background: #fdeaea;
+		border-color: #e2a1a1;
+		color: #8a1f1f;
 	}
 
 	@media print {
