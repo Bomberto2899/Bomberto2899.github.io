@@ -4,9 +4,11 @@
 	import { downloadSong } from '../persistence/download';
 	import { parseUploadedFile } from '../persistence/upload';
 	import ErrorBanner from './Common/ErrorBanner.svelte';
+	import HelpPanel from './HelpPanel.svelte';
 
 	let fileInput = $state<HTMLInputElement | undefined>(undefined);
 	let uploadError = $state<string | null>(null);
+	let helpOpen = $state(false);
 
 	function triggerUpload() {
 		fileInput?.click();
@@ -46,6 +48,9 @@
 		<button onclick={triggerUpload}>Upload leadsheet…</button>
 		<button onclick={() => downloadSong(songStore.song)}>Download leadsheet</button>
 		<button class="danger" onclick={clearSong}>Clear</button>
+		<button class:active={helpOpen} onclick={() => (helpOpen = !helpOpen)} aria-expanded={helpOpen}>
+			Help
+		</button>
 		<input
 			bind:this={fileInput}
 			type="file"
@@ -54,6 +59,9 @@
 			onchange={onFileSelected}
 		/>
 	</div>
+	{#if helpOpen}
+		<HelpPanel onClose={() => (helpOpen = false)} />
+	{/if}
 	{#if uploadError}
 		<ErrorBanner message={uploadError} />
 	{/if}
@@ -67,6 +75,7 @@
 
 	.actions {
 		display: flex;
+		flex-wrap: wrap;
 		gap: 0.5rem;
 	}
 
@@ -77,10 +86,17 @@
 		border-radius: 4px;
 		background: white;
 		cursor: pointer;
+		white-space: nowrap;
 	}
 
 	button:hover {
 		background: #eef2f7;
+	}
+
+	button.active {
+		background: #1a4d8f;
+		border-color: #1a4d8f;
+		color: white;
 	}
 
 	button.danger:hover {
