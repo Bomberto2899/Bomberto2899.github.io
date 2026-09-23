@@ -3,6 +3,7 @@
 	import { metadataFieldRegistry } from '../../metadata/fieldRegistry';
 	import { songStore } from '../../state/songStore.svelte';
 	import { notationMode } from '../../state/notationMode.svelte';
+	import { viewOptions } from '../../state/viewOptions.svelte';
 	import MetadataFieldInput from './MetadataFieldInput.svelte';
 
 	let { metadata }: { metadata: Metadata } = $props();
@@ -31,6 +32,24 @@
 				onclick={() => notationMode.set('roman')}
 			>
 				Roman numerals
+			</button>
+		</div>
+	</div>
+
+	<div class="field">
+		<span class="label">Form graph</span>
+		<div class="toggle">
+			<button
+				class:active={viewOptions.showFormGraph}
+				onclick={() => viewOptions.setShowFormGraph(true)}
+			>
+				On
+			</button>
+			<button
+				class:active={!viewOptions.showFormGraph}
+				onclick={() => viewOptions.setShowFormGraph(false)}
+			>
+				Off
 			</button>
 		</div>
 	</div>

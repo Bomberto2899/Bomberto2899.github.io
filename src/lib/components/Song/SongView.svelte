@@ -3,6 +3,8 @@
 	import MetadataPanel from '../Metadata/MetadataPanel.svelte';
 	import SongHeader from './SongHeader.svelte';
 	import SectionView from './SectionView.svelte';
+	import FormGraph from './FormGraph.svelte';
+	import { viewOptions } from '../../state/viewOptions.svelte';
 
 	let song = $derived(songStore.song);
 
@@ -18,6 +20,9 @@
 </script>
 
 <SongHeader metadata={song.metadata} />
+{#if viewOptions.showFormGraph}
+	<FormGraph sections={song.sections} />
+{/if}
 <MetadataPanel metadata={song.metadata} />
 
 <div class="bars">
