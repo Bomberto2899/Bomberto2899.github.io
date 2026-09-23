@@ -27,4 +27,13 @@ describe('aliasExpansionEdit', () => {
 		expect(aliasExpansionEdit('\\lyric ', 7)).toBeNull();
 		expect(aliasExpansionEdit('\\', 1)).toBeNull();
 	});
+
+	it('\\split ends the current lyric and starts a new one on an indented line', () => {
+		const value = '\t\t<lyric>Lorem \\split ipsum</lyric>';
+		const caret = value.indexOf(' ipsum');
+		expect(expand(value, caret)).toEqual({
+			text: '\t\t<lyric>Lorem </lyric>\n\t\t<lyric> ipsum</lyric>',
+			cursor: '\t\t<lyric>Lorem </lyric>\n\t\t<lyric>'.length
+		});
+	});
 });
