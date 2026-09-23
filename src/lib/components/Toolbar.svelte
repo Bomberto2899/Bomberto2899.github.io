@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { songStore } from '../state/songStore.svelte';
+	import { viewOptions } from '../state/viewOptions.svelte';
 	import { createBlankSong } from '../model/blankSong';
 	import { downloadSong } from '../persistence/download';
 	import { parseUploadedFile } from '../persistence/upload';
@@ -13,6 +14,8 @@
 	}
 
 	function addSection() {
+		// A new section opens straight into renaming, which needs its heading visible.
+		viewOptions.setShowSections(true);
 		songStore.addSection(`Section ${songStore.song.sections.length + 1}`);
 	}
 
