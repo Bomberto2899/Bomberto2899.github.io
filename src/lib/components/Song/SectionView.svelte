@@ -10,6 +10,7 @@
 		metadata
 	}: { section: Section; firstBarNumber: number; metadata: Metadata } = $props();
 
+	let collapsed = $state(false);
 	let editing = $state(false);
 	let draft = $state('');
 	let inputEl = $state<HTMLInputElement | undefined>(undefined);
@@ -56,8 +57,16 @@
 	});
 </script>
 
-<section class="section">
+<section class="section" class:collapsed>
 	<div class="section-header" class:unnamed={!section.name && !editing}>
+		<button
+			class="collapse"
+			onclick={() => (collapsed = !collapsed)}
+			title={collapsed ? 'Expand this section' : 'Minimise this section'}
+			aria-expanded={!collapsed}
+		>
+			{collapsed ? '▸' : '▾'}
+		</button>
 		{#if editing}
 			<input
 				bind:this={inputEl}
@@ -72,14 +81,30 @@
 				{section.name || '+ Name section'}
 			</button>
 		{/if}
-		<button class="delete-section" onclick={deleteSection} title="Delete this section">&times;</button>
+		{#if collapsed}
+			<span class="summary">
+				{section.bars.length} {section.bars.length === 1 ? 'bar' : 'bars'}
+			</span>
+		{/if}
+		<button
+			class="section-action"
+			onclick={() => songStore.duplicateSection(section.id)}
+			title="Duplicate this section"
+		>
+			⧉
+		</button>
+		<button class="section-action delete-section" onclick={deleteSection} title="Delete this section">
+			&times;
+		</button>
 	</div>
 
-	{#each section.bars as bar, i (bar.id)}
-		<BarView {bar} barNumber={firstBarNumber + i} {metadata} />
-	{/each}
+	<div class="section-body">
+		{#each section.bars as bar, i (bar.id)}
+			<BarView {bar} barNumber={firstBarNumber + i} {metadata} />
+		{/each}
 
-	<button class="add-bar" onclick={() => songStore.addBar(section.id)}>+ Add bar</button>
+		<button class="add-bar" onclick={() => songStore.addBar(section.id)}>+ Add bar</button>
+	</div>
 </section>
 
 <style>
@@ -91,7 +116,7 @@
 		display: flex;
 		align-items: center;
 		gap: 0.25rem;
-		padding-left: 2.25rem;
+		padding-left: 0.75rem;
 	}
 
 	.name {
@@ -123,7 +148,8 @@
 		border-radius: 3px;
 	}
 
-	.delete-section,
+	.collapse,
+	.section-action,
 	.add-bar {
 		border: none;
 		background: transparent;
@@ -131,16 +157,37 @@
 		cursor: pointer;
 	}
 
-	.delete-section {
+	.collapse {
+		width: 1.25rem;
+		padding: 0.1rem 0;
+		font-size: 0.8rem;
+		color: #888;
+	}
+
+	.collapse:hover,
+	.section-action:hover {
+		color: #1a4d8f;
+	}
+
+	.summary {
+		font-size: 0.8rem;
+		color: #888;
+	}
+
+	.section-action {
 		font-size: 1rem;
 		line-height: 1;
 		padding: 0.2rem 0.4rem;
 		opacity: 0;
 	}
 
-	.section-header:hover .delete-section,
-	.delete-section:focus-visible {
+	.section-header:hover .section-action,
+	.section-action:focus-visible {
 		opacity: 1;
+	}
+
+	.collapsed .section-body {
+		display: none;
 	}
 
 	.delete-section:hover {
@@ -158,7 +205,14 @@
 	}
 
 	@media print {
-		.delete-section,
+		/* A printed leadsheet always shows every bar, even from minimised sections. */
+		.collapsed .section-body {
+			display: block;
+		}
+
+		.collapse,
+		.summary,
+		.section-action,
 		.add-bar,
 		.unnamed {
 			display: none;

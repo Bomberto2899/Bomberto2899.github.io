@@ -1,5 +1,5 @@
 import type { Bar, Section, Song } from '../model/types';
-import { createBlankBar, createBlankSection, createBlankSong } from '../model/blankSong';
+import { cloneSection, createBlankBar, createBlankSection, createBlankSong } from '../model/blankSong';
 
 let song = $state<Song>(createBlankSong());
 /** Set when a section is added from the UI so its view can open straight into renaming. */
@@ -62,6 +62,12 @@ export const songStore = {
 	renameSection(sectionId: string, name: string) {
 		const section = song.sections.find((s) => s.id === sectionId);
 		if (section) section.name = name;
+	},
+	/** Inserts a copy of the section (same name, so it shares its form-graph colour) right after it. */
+	duplicateSection(sectionId: string) {
+		const index = song.sections.findIndex((s) => s.id === sectionId);
+		if (index === -1) return;
+		song.sections.splice(index + 1, 0, cloneSection($state.snapshot(song.sections[index])));
 	},
 	deleteSection(sectionId: string) {
 		song.sections = song.sections.filter((s) => s.id !== sectionId);

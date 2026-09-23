@@ -16,3 +16,16 @@ export function createBlankSection(name = ''): Section {
 export function createBlankBar(): Bar {
 	return { id: createId(), chords: [], lyrics: [] };
 }
+
+/** Deep-copies a section, giving it and everything in it fresh ids. */
+export function cloneSection(section: Section): Section {
+	return {
+		id: createId(),
+		name: section.name,
+		bars: section.bars.map((bar) => ({
+			id: createId(),
+			chords: bar.chords.map((chord) => ({ ...chord, id: createId() })),
+			lyrics: bar.lyrics.map((lyric) => ({ ...lyric, id: createId() }))
+		}))
+	};
+}
