@@ -42,13 +42,4 @@ export interface PositionedBar {
 	beatsPerBar: number;
 	chords: PositionedItem<ChordEvent>[];
 	lyrics: PositionedItem<LyricEvent>[];
-	/** Each lyric's words, spread evenly from its beat up to the next lyric (or the end of the bar). */
-	lyricWords: PositionedWord[];
-}
-
-export interface PositionedWord {
-	/** Unique within the bar, for keyed rendering. */
-	id: string;
-	text: string;
-	position: number;
 }
