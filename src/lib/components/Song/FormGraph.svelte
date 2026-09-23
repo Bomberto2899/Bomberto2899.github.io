@@ -33,7 +33,12 @@
 				style:flex-grow={segment.bars}
 				title="{segment.name || 'Unnamed section'}: {segment.bars} bar(s)"
 			>
-				<span class="name">{segment.name}</span>
+				<span class="name">
+					{segment.name}
+					<span class="bar-count">
+						{segment.name ? '· ' : ''}{segment.bars} {segment.bars === 1 ? 'bar' : 'bars'}
+					</span>
+				</span>
 				<span class="line" style:background={segment.color}></span>
 			</div>
 		{/each}
@@ -62,6 +67,11 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 		min-height: 1em;
+	}
+
+	.bar-count {
+		color: #888;
+		font-variant-numeric: tabular-nums;
 	}
 
 	.line {
