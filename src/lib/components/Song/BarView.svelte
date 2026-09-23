@@ -5,6 +5,7 @@
 	import { parseBarFragment } from '../../xml/parseBarFragment';
 	import { songStore } from '../../state/songStore.svelte';
 	import { applyEdit, indentEdit, outdentEdit } from '../../editor/textareaEditing';
+	import { aliasExpansionEdit } from '../../editor/aliases';
 	import BarRenderer from './BarRenderer.svelte';
 	import ErrorBanner from '../Common/ErrorBanner.svelte';
 
@@ -60,7 +61,10 @@
 	function onTab(outdent: boolean) {
 		if (!textareaEl) return;
 		const { selectionStart, selectionEnd, value } = textareaEl;
-		const edit = outdent ? outdentEdit(value, selectionStart) : indentEdit(selectionStart, selectionEnd);
+		const alias =
+			!outdent && selectionStart === selectionEnd ? aliasExpansionEdit(value, selectionStart) : null;
+		const edit =
+			alias ?? (outdent ? outdentEdit(value, selectionStart) : indentEdit(selectionStart, selectionEnd));
 		if (edit) applyEdit(textareaEl, edit);
 	}
 
