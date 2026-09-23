@@ -37,12 +37,14 @@ const EXAMPLE_XML = `<song>
 describe('parseSong', () => {
 	it('parses the example leadsheet into a Song with default metadata', () => {
 		const song = parseSong(EXAMPLE_XML);
-		expect(song.bars).toHaveLength(2);
+		expect(song.sections).toHaveLength(1);
+		expect(song.sections[0].name).toBe('');
+		expect(song.sections[0].bars).toHaveLength(2);
 		expect(song.metadata.timesignature).toBe('4/4');
 		expect(song.metadata.key).toBe('C');
 		expect(song.metadata.accidentals).toBe('flat');
 
-		const [bar1] = song.bars;
+		const [bar1] = song.sections[0].bars;
 		expect(bar1.chords.map((c) => [c.text, c.beat])).toEqual([
 			['C', undefined],
 			['Am', undefined],
@@ -76,7 +78,7 @@ describe('parseSong', () => {
 		const song = parseSong(
 			'<song><bar><chords><chord romannumerals="true">V7</chord></chords></bar></song>'
 		);
-		expect(song.bars[0].chords[0].romanNumerals).toBe(true);
+		expect(song.sections[0].bars[0].chords[0].romanNumerals).toBe(true);
 	});
 
 	it('throws XmlParseError on malformed XML', () => {
@@ -91,9 +93,40 @@ describe('parseSong', () => {
 		const song = parseSong(EXAMPLE_XML);
 		const reparsed = parseSong(serializeSong(song));
 		expect(reparsed.metadata).toEqual(song.metadata);
-		expect(reparsed.bars.map((b) => b.chords.map((c) => [c.text, c.beat]))).toEqual(
-			song.bars.map((b) => b.chords.map((c) => [c.text, c.beat]))
+		expect(reparsed.sections[0].bars.map((b) => b.chords.map((c) => [c.text, c.beat]))).toEqual(
+			song.sections[0].bars.map((b) => b.chords.map((c) => [c.text, c.beat]))
 		);
+	});
+
+	it('parses <section> elements and groups loose bars into unnamed sections', () => {
+		const song = parseSong(`<song>
+			<bar><chords><chord>A</chord></chords></bar>
+			<section name="Verse 1"><bar /><bar /></section>
+			<bar /><bar />
+			<section name="Chorus"></section>
+		</song>`);
+		expect(song.sections.map((s) => [s.name, s.bars.length])).toEqual([
+			['', 1],
+			['Verse 1', 2],
+			['', 2],
+			['Chorus', 0]
+		]);
+	});
+
+	it('round-trips sections, including names that need escaping', () => {
+		const xml = '<song><section name="Intro &amp; &quot;A&quot;"><bar /></section><section name="B"><bar /><bar /></section></song>';
+		const song = parseSong(xml);
+		const reparsed = parseSong(serializeSong(song));
+		expect(reparsed.sections.map((s) => [s.name, s.bars.length])).toEqual([
+			['Intro & "A"', 1],
+			['B', 2]
+		]);
+	});
+
+	it('writes unnamed sections as loose bars', () => {
+		const out = serializeSong(parseSong('<song><bar /></song>'));
+		expect(out).not.toContain('<section');
+		expect(out).toContain('\t<bar>');
 	});
 });
 

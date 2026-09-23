@@ -12,8 +12,12 @@
 		fileInput?.click();
 	}
 
+	function addSection() {
+		songStore.addSection(`Section ${songStore.song.sections.length + 1}`);
+	}
+
 	function clearSong() {
-		if (confirm('Clear the current leadsheet? This removes all bars and resets metadata to defaults.')) {
+		if (confirm('Clear the current leadsheet? This removes all sections and bars and resets metadata to defaults.')) {
 			songStore.load(createBlankSong());
 			uploadError = null;
 		}
@@ -37,6 +41,7 @@
 
 <div class="toolbar">
 	<div class="actions">
+		<button onclick={addSection}>+ Add section</button>
 		<button onclick={() => songStore.addBar()}>+ Add bar</button>
 		<button onclick={triggerUpload}>Upload leadsheet…</button>
 		<button onclick={() => downloadSong(songStore.song)}>Download leadsheet</button>

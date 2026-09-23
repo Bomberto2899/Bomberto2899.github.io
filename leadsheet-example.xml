@@ -1,37 +1,41 @@
 <song>
 	<metadata timesignature="4/4" key="C" accidentals="flat" />
-	<bar>
-		<chords>
-			<chord>C</chord>
-			<chord>Am</chord>
-			<chord>F</chord>
-			<chord beat="4">G7sus4</chord>
-			<chord beat="4">G7</chord>
-		</chords>
-		<lyrics>
-			<lyric> Lorem ipsum</lyric>
-			<lyric> dolor sit amet </lyric>
-		</lyrics>
-	</bar>
-	<bar>
-		<chords>
-			<chord>C</chord>
-			<chord>Am</chord>
-			<chord>F</chord>
-			<chord beat="4">G7sus4</chord>
-			<chord beat="4">G7</chord>
-		</chords>
-		<lyrics>
-			<lyric> Lorem ipsum</lyric>
-			<lyric> dolor sit amet </lyric>
-		</lyrics>
-	</bar>
-	<bar>
-		<chords>
-			<chord romannumerals="true">I</chord>
-			<chord romannumerals="true">vi</chord>
-			<chord romannumerals="true">IV</chord>
-			<chord romannumerals="true">VI7</chord>
-		</chords>
-	</bar>
+	<section name="Verse 1">
+		<bar>
+			<chords>
+				<chord>C</chord>
+				<chord>Am</chord>
+				<chord>F</chord>
+				<chord beat="4">G7sus4</chord>
+				<chord beat="4">G7</chord>
+			</chords>
+			<lyrics>
+				<lyric> Lorem ipsum</lyric>
+				<lyric> dolor sit amet </lyric>
+			</lyrics>
+		</bar>
+		<bar>
+			<chords>
+				<chord>C</chord>
+				<chord>Am</chord>
+				<chord>F</chord>
+				<chord beat="4">G7sus4</chord>
+				<chord beat="4">G7</chord>
+			</chords>
+			<lyrics>
+				<lyric> Lorem ipsum</lyric>
+				<lyric> dolor sit amet </lyric>
+			</lyrics>
+		</bar>
+	</section>
+	<section name="Chorus">
+		<bar>
+			<chords>
+				<chord romannumerals="true">I</chord>
+				<chord romannumerals="true">vi</chord>
+				<chord romannumerals="true">IV</chord>
+				<chord romannumerals="true">VI7</chord>
+			</chords>
+		</bar>
+	</section>
 </song>

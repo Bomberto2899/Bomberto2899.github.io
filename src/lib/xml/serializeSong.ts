@@ -21,8 +21,15 @@ export function serializeSong(song: Song): string {
 	const metadataLine = serializeMetadata(song);
 	if (metadataLine) lines.push(metadataLine);
 
-	for (const bar of song.bars) {
-		lines.push(serializeBar(bar, '\t'));
+	for (const section of song.sections) {
+		// Unnamed sections are written as loose bars, so section-less files round-trip unchanged.
+		if (!section.name) {
+			for (const bar of section.bars) lines.push(serializeBar(bar, '\t'));
+			continue;
+		}
+		lines.push(`\t<section name="${escapeXmlAttribute(section.name)}">`);
+		for (const bar of section.bars) lines.push(serializeBar(bar, '\t\t'));
+		lines.push('\t</section>');
 	}
 
 	lines.push('</song>');

@@ -2,21 +2,31 @@
 	import { songStore } from '../../state/songStore.svelte';
 	import MetadataPanel from '../Metadata/MetadataPanel.svelte';
 	import SongHeader from './SongHeader.svelte';
-	import BarView from './BarView.svelte';
+	import SectionView from './SectionView.svelte';
 
 	let song = $derived(songStore.song);
+
+	/** Bar numbers run continuously across sections. */
+	let firstBarNumbers = $derived.by(() => {
+		let next = 1;
+		return song.sections.map((section) => {
+			const first = next;
+			next += section.bars.length;
+			return first;
+		});
+	});
 </script>
 
 <SongHeader metadata={song.metadata} />
 <MetadataPanel metadata={song.metadata} />
 
 <div class="bars">
-	{#each song.bars as bar, i (bar.id)}
-		<BarView {bar} barNumber={i + 1} metadata={song.metadata} />
+	{#each song.sections as section, i (section.id)}
+		<SectionView {section} firstBarNumber={firstBarNumbers[i]} metadata={song.metadata} />
 	{/each}
 
-	{#if song.bars.length === 0}
-		<p class="empty">No bars yet — upload a leadsheet or add a bar to get started.</p>
+	{#if song.sections.length === 0}
+		<p class="empty">No bars yet — upload a leadsheet or add a section or bar to get started.</p>
 	{/if}
 </div>
 

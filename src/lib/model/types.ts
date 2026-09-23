@@ -1,5 +1,12 @@
 export interface Song {
 	metadata: Metadata;
+	sections: Section[];
+}
+
+export interface Section {
+	id: string;
+	/** Empty for an unnamed section (e.g. bars written directly under <song>). */
+	name: string;
 	bars: Bar[];
 }
 
