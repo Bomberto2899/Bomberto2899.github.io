@@ -37,24 +37,6 @@
 	</div>
 
 	<div class="field">
-		<span class="label">Sections</span>
-		<div class="toggle">
-			<button
-				class:active={viewOptions.showSections}
-				onclick={() => viewOptions.setShowSections(true)}
-			>
-				Show
-			</button>
-			<button
-				class:active={!viewOptions.showSections}
-				onclick={() => viewOptions.setShowSections(false)}
-			>
-				Hide
-			</button>
-		</div>
-	</div>
-
-	<div class="field">
 		<span class="label">Form graph</span>
 		<div class="toggle">
 			<button

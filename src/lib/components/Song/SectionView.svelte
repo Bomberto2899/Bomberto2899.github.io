@@ -2,7 +2,6 @@
 	import { onMount, tick } from 'svelte';
 	import type { Metadata, Section } from '../../model/types';
 	import { songStore } from '../../state/songStore.svelte';
-	import { viewOptions } from '../../state/viewOptions.svelte';
 	import BarView from './BarView.svelte';
 
 	let {
@@ -57,43 +56,35 @@
 	});
 </script>
 
-<section class="section" class:hidden-sections={!viewOptions.showSections}>
-	{#if viewOptions.showSections}
-		<div class="section-header" class:unnamed={!section.name && !editing}>
-			{#if editing}
-				<input
-					bind:this={inputEl}
-					bind:value={draft}
-					class="name-input"
-					placeholder="Section name"
-					onblur={commitRename}
-					onkeydown={onKeydown}
-				/>
-			{:else}
-				<button class="name" onclick={startRename} title="Rename this section">
-					{section.name || '+ Name section'}
-				</button>
-			{/if}
-			<button class="delete-section" onclick={deleteSection} title="Delete this section">&times;</button>
-		</div>
-	{/if}
+<section class="section">
+	<div class="section-header" class:unnamed={!section.name && !editing}>
+		{#if editing}
+			<input
+				bind:this={inputEl}
+				bind:value={draft}
+				class="name-input"
+				placeholder="Section name"
+				onblur={commitRename}
+				onkeydown={onKeydown}
+			/>
+		{:else}
+			<button class="name" onclick={startRename} title="Rename this section">
+				{section.name || '+ Name section'}
+			</button>
+		{/if}
+		<button class="delete-section" onclick={deleteSection} title="Delete this section">&times;</button>
+	</div>
 
 	{#each section.bars as bar, i (bar.id)}
 		<BarView {bar} barNumber={firstBarNumber + i} {metadata} />
 	{/each}
 
-	{#if viewOptions.showSections}
-		<button class="add-bar" onclick={() => songStore.addBar(section.id)}>+ Add bar</button>
-	{/if}
+	<button class="add-bar" onclick={() => songStore.addBar(section.id)}>+ Add bar</button>
 </section>
 
 <style>
 	.section {
 		margin-top: 0.75rem;
-	}
-
-	.section.hidden-sections {
-		margin-top: 0;
 	}
 
 	.section-header {
