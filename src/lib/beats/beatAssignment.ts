@@ -9,8 +9,9 @@ interface Beatable {
  * chords or lyrics within a single bar.
  *
  * Items without an explicit `beat` are spread evenly across the beats NOT claimed by any
- * explicit-beat item, using a floor-based even distribution. Items that share the same
- * explicit beat are evenly subdivided within that single beat's width.
+ * explicit-beat item, using a floor-based even distribution. If there are no explicit items and
+ * more unmarked items than beats, they are instead spread evenly (fractionally) across the whole
+ * bar. Items that share the same explicit beat are evenly subdivided within that single beat's width.
  */
 export function assignBeatPositions<T extends Beatable>(
 	items: T[],
@@ -54,7 +55,12 @@ export function assignBeatPositions<T extends Beatable>(
 	let slotList = fullRange.filter((b) => !claimedBeats.has(b));
 	const n = unmarked.length;
 
-	if (n > 0) {
+	if (n > 0 && explicit.length === 0 && n > beatsPerBar) {
+		// More items than beats: they can't each own a beat, so spread them evenly over the bar.
+		unmarked.forEach(({ item }, i) => {
+			result.push({ item, position: 1 + (i * beatsPerBar) / n });
+		});
+	} else if (n > 0) {
 		if (slotList.length === 0) {
 			console.warn(
 				'All beats in this bar are claimed by explicit beat= items, but unmarked items remain; falling back to spreading them across the full bar.'

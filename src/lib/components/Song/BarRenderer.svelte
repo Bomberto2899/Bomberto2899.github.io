@@ -28,9 +28,9 @@
 			{/each}
 		</div>
 		<div class="lyric-row">
-			{#each positioned.lyrics as positionedLyric (positionedLyric.item.id)}
-				<div class="token" style:left={leftPercent(positionedLyric.position)}>
-					<span class="lyric">{positionedLyric.item.text}</span>
+			{#each positioned.lyricWords as word (word.id)}
+				<div class="token" style:left={leftPercent(word.position)}>
+					<span class="lyric">{word.text}</span>
 				</div>
 			{/each}
 		</div>

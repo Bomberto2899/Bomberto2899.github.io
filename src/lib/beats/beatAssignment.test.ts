@@ -79,4 +79,10 @@ describe('assignBeatPositions', () => {
 			['sum', 4.5]
 		]);
 	});
+
+	it('spreads more unmarked items than beats evenly over the bar instead of stacking them', () => {
+		const items: TestItem[] = [{ text: 'a' }, { text: 'b' }, { text: 'c' }, { text: 'd' }];
+		const result = byPosition(assignBeatPositions(items, 3));
+		expect(result.map((r) => r.position)).toEqual([1, 1.75, 2.5, 3.25]);
+	});
 });
